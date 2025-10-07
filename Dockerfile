@@ -20,7 +20,7 @@ ARG VITE_API_URL
 ENV VITE_API_URL=$VITE_API_URL
 
 # Construire le projet (Vite génère le dossier /app/dist)
-RUN npm run build && ls -l /app/dist
+RUN npm run build 
 
 
 # -----------------------------
@@ -29,7 +29,7 @@ RUN npm run build && ls -l /app/dist
 FROM nginx:stable-alpine
 
 # Copier les fichiers du dossier dist dans le répertoire web de Nginx
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/build /usr/share/nginx/html
 
 # Exposer le port 80
 EXPOSE 80
