@@ -20,7 +20,7 @@ ARG VITE_API_URL
 ENV VITE_API_URL=$VITE_API_URL
 
 # Construire le projet (Vite génère le dossier /app/dist)
-RUN npm run build
+RUN npm run build && ls -l /app/dist
 
 
 # -----------------------------
