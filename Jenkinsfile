@@ -21,7 +21,7 @@ pipeline {
 
          stage('Install dependencies - Backend') {
             steps {
-                dir('back-end') {
+                dir('mon-projet-express') {
                     sh 'npm install'
                 }
             }
@@ -29,7 +29,7 @@ pipeline {
 
         stage('Install dependencies - Frontend') {
             steps {
-                dir('front-end') {
+                dir('.') {
                     sh 'npm install'
                 }
             }
@@ -46,7 +46,7 @@ pipeline {
         stage('Build Frontend Image') {
             steps {
                 script {
-                    sh "docker build -t ${DOCKER_HUB_REPO}/frontend:latest ."
+                    sh "docker build -t ${DOCKER_HUB_REPO}/frontend:latest ./"
                 }
             }
         }
