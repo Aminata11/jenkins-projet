@@ -12,7 +12,7 @@ pipeline {
                     branches: [[name: '*/main']],
                     extensions: [],
                     userRemoteConfigs: [[
-                        credentialsId: 'github-jenkins',
+                        credentialsId: 'token-git',
                         url: 'https://github.com/Aminata11/jenkins-projet.git'
                     ]]
                 )
