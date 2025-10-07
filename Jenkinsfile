@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB_REPO = 'ndiaye2024'
+        DOCKER_HUB_REPO = 'aminata286'
     }
 
     stages {
@@ -13,7 +13,7 @@ pipeline {
                     extensions: [],
                     userRemoteConfigs: [[
                         credentialsId: 'github-jenkins',
-                        url: 'https://github.com/ndiayekhardiata2024/Depot_Jenkins.git'
+                        url: 'https://github.com/Aminata11/jenkins-projet.git'
                     ]]
                 )
             }
@@ -38,7 +38,7 @@ pipeline {
         stage('Login to DockerHub') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: 'jenkinaute',
+                    credentialsId: 'token-docker',
                     usernameVariable: 'DOCKER_USER',
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
@@ -79,9 +79,9 @@ pipeline {
                         <p>Consultez les logs ici : <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
                     </body>
                 </html>""",
-                to: 'ndiayekhardiata2024@gmail.com',
-                from: 'ndiayekhardiata2024@gmail.com',
-                replyTo: 'ndiayekhardiata2024@gmail.com',
+                to: 'seckaminata87@gmail.com',
+                from: 'seckaminata87@gmail.com',
+                replyTo: 'seckaminata87@gmail.com',
                 mimeType: 'text/html'
             )
         }
@@ -96,9 +96,9 @@ pipeline {
                         <p>Consultez les logs ici : <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
                     </body>
                 </html>""",
-                to: 'ndiayekhardiata2024@gmail.com',
-                from: 'ndiayekhardiata2024@gmail.com',
-                replyTo: 'ndiayekhardiata2024@gmail.com',
+                to: 'seckaminata87@gmail.com',
+                from: 'seckaminata87@gmail.com',
+                replyTo: 'seckaminata87@gmail.com',
                 mimeType: 'text/html'
             )
         }
