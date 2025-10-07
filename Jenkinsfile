@@ -30,7 +30,7 @@ pipeline {
         stage('Build Frontend Image') {
             steps {
                 script {
-                    sh "docker build -t ${DOCKER_HUB_REPO}/frontend:latest ./"
+                    sh "docker build -t ${DOCKER_HUB_REPO}/frontend:latest ."
                 }
             }
         }
