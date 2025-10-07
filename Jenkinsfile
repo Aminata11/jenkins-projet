@@ -19,6 +19,22 @@ pipeline {
             }
         }
 
+         stage('Install dependencies - Backend') {
+            steps {
+                dir('back-end') {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Install dependencies - Frontend') {
+            steps {
+                dir('front-end') {
+                    sh 'npm install'
+                }
+            }
+        }
+
         stage('Build Backend Image') {
             steps {
                 script {
