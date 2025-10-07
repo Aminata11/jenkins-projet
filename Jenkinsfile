@@ -19,21 +19,7 @@ pipeline {
             }
         }
 
-         stage('Install dependencies - Backend') {
-            steps {
-                dir('mon-projet-express') {
-                    sh 'npm install'
-                }
-            }
-        }
-
-        stage('Install dependencies - Frontend') {
-            steps {
-                dir('.') {
-                    sh 'npm install'
-                }
-            }
-        }
+        
 
         stage('Build Backend Image') {
             steps {
