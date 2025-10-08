@@ -30,16 +30,16 @@ pipeline {
         sh 'sonar-scanner -v'
     }
 }
-          stage('SonarQube Analysis') {
+    stage('SonarQube Analysis') {
     steps {
-        withSonarQubeEnv('sonar-server') {
-            sh '''
-                echo "📦 Lancement de l'analyse SonarQube..."
-                sonar-scanner -X || echo "⚠️ Échec du scanner"
-            '''
+        dir('/var/jenkins_home/workspace/test-sonarqube') {
+            withSonarQubeEnv('sonar-server') {
+                sh '/opt/sonar-scanner/bin/sonar-scanner -X'
+            }
         }
     }
 }
+
 
 
         stage('Quality Gate') {
