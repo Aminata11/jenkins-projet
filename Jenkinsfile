@@ -1,8 +1,13 @@
 pipeline {
     agent any
+    
+    tools {
+    sonarQubeScanner 'SonarScanner'
+}
 
     environment {
         DOCKER_HUB_REPO = 'aminata286'
+        SONAR_TOKEN = credentials('mon-token-sonar')
     }
 
     stages {
@@ -19,9 +24,15 @@ pipeline {
             }
         }
 
+           stage('Debug Scanner') {
+    steps {
+        sh 'which sonar-scanner'
+        sh 'sonar-scanner -v'
+    }
+}
            stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('SonarQube_Local') {
+                withSonarQubeEnv('sonar-server') {
                     sh 'sonar-scanner'
                 }
             }
