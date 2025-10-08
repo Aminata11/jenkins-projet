@@ -21,7 +21,7 @@ pipeline {
             }
         }
 
-             stage('SonarQube Analysis') {
+    stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar-server') {
                     sh 'sonar-scanner'
@@ -29,7 +29,7 @@ pipeline {
             }
         }
 
-        stage('Quality Gate') {
+    stage('Quality Gate') {
             steps {
                 timeout(time: 2, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
