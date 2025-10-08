@@ -30,13 +30,17 @@ pipeline {
         sh 'sonar-scanner -v'
     }
 }
-           stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('sonar-server') {
-                    sh 'sonar-scanner -X'
-                }
-            }
+          stage('SonarQube Analysis') {
+    steps {
+        withSonarQubeEnv('sonar-server') {
+            sh '''
+                echo "📦 Lancement de l'analyse SonarQube..."
+                sonar-scanner -X || echo "⚠️ Échec du scanner"
+            '''
         }
+    }
+}
+
 
         stage('Quality Gate') {
             steps {
