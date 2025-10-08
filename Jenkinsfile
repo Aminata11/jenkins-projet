@@ -37,9 +37,10 @@ pipeline {
 
 stage('SonarQube Analysis') {
     steps {
-      withSonarQubeEnv('sonar-server') {
-    sh '/opt/sonar-scanner/bin/sonar-scanner -X'
+  withSonarQubeEnv('sonar-server') {
+    sh '/opt/sonar-scanner/bin/sonar-scanner -Dsonar.host.url=http://192.168.1.26:9000 -X'
 }
+
     }
 }
 
