@@ -28,6 +28,22 @@ pipeline {
                 }
             }
         }
+         stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube_Local') {
+                    sh 'sonar-scanner'
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+
 
         stage('Build Frontend Image') {
             steps {
