@@ -30,15 +30,22 @@ pipeline {
         sh 'sonar-scanner -v'
     }
 }
+
+        stage('Vérification fichier Sonar') {
+    steps {
+        sh 'ls -la'
+        sh 'cat sonar-project.properties || echo "❌ Fichier sonar-project.properties introuvable"'
+    }
+}
+
     stage('SonarQube Analysis') {
     steps {
-        dir('/var/jenkins_home/workspace/test-sonarqube') {
-            withSonarQubeEnv('sonar-server') {
-                sh '/opt/sonar-scanner/bin/sonar-scanner -X'
-            }
+        withSonarQubeEnv('sonar-server') {
+            sh '/opt/sonar-scanner/bin/sonar-scanner -X'
         }
     }
 }
+
 
 
 
