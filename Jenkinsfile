@@ -21,22 +21,35 @@ pipeline {
             }
         }
 
-           stage('SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube_Local') {
-                    sh 'sonar-scanner'
-                }
-            }
-        }
+           stage('Debug Scanner') {
+    steps {
+       sh '/opt/sonar-scanner/bin/sonar-scanner -v'
+    }
+}
 
-        stage('Quality Gate') {
-            steps {
-                timeout(time: 1, unit: 'HOURS') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
+        stage('Vérification fichier Sonar') {
 
+    steps {
+        sh 'ls -la'
+        sh 'cat sonar-project.properties || echo "❌ Fichier sonar-project.properties introuvable"'
+    }
+}
+
+stage('SonarQube Analysis') {
+    steps {
+        withSonarQubeEnv('sonar-server') {
+    sh 'bash -c "/opt/sonar-scanner/bin/sonar-scanner"'
+}
+    }
+}
+
+stage('Quality Gate') {
+    steps {
+        timeout(time: 5, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+        }
+    }
+}
 
         stage('Build Backend Image') {
             steps {
