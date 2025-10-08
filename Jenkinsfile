@@ -37,19 +37,20 @@ pipeline {
 
 stage('SonarQube Analysis') {
     steps {
-withSonarQubeEnv('sonar-server') {
-    sh '/opt/sonar-scanner/bin/sonar-scanner -Dsonar.host.url=http://192.168.1.26:9000 -X'
-}
-
-
+        withSonarQubeEnv('sonar-server') {
+            sh '/opt/sonar-scanner/bin/sonar-scanner -Dsonar.host.url=http://192.168.1.26:9000 -X'
+        }
     }
 }
 
+stage('Quality Gate') {
+    steps {
+        timeout(time: 5, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+        }
+    }
+}
 
-
-
-
-        
 
         stage('Build Backend Image') {
             steps {
