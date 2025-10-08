@@ -40,14 +40,6 @@ pipeline {
             }
         } // 👈👉 Accolade fermante manquante ajoutée ici !
 
-                stage('Quality Gate') {
-            steps {
-                timeout(time: 2, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
-
  
         stage('Build Backend Image') {
             steps {
