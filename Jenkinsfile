@@ -38,9 +38,9 @@ pipeline {
 stage('SonarQube Analysis') {
     steps {
         withSonarQubeEnv('sonar-server') {
-           sh '/opt/sonar-scanner/bin/sonar-scanner'
+    sh 'bash -c "/opt/sonar-scanner/bin/sonar-scanner"'
+}
 
-        }
     }
 }
 
