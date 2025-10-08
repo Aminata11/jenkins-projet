@@ -19,16 +19,7 @@ pipeline {
             }
         }
 
-        
-
-        stage('Build Backend Image') {
-            steps {
-                script {
-                    sh "docker build -t ${DOCKER_HUB_REPO}/backend:latest ./mon-projet-express"
-                }
-            }
-        }
-         stage('SonarQube Analysis') {
+           stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQube_Local') {
                     sh 'sonar-scanner'
@@ -44,7 +35,14 @@ pipeline {
             }
         }
 
-
+        stage('Build Backend Image') {
+            steps {
+                script {
+                    sh "docker build -t ${DOCKER_HUB_REPO}/backend:latest ./mon-projet-express"
+                }
+            }
+        }
+      
         stage('Build Frontend Image') {
             steps {
                 script {
