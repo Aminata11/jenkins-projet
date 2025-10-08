@@ -4,7 +4,7 @@ pipeline {
 
     environment {
         DOCKER_HUB_REPO = 'aminata286'
-        SONAR_TOKEN = credentials('mon-token-sonar')
+        SONAR_HOST_URL  = 'http://host.docker.internal:9000'   // SonarQube local
     }
 
     stages {
@@ -21,6 +21,25 @@ pipeline {
             }
         }
 
+          stage('SonarQube Analysis') {
+            steps {
+                echo "🔍 Analyse du code avec SonarQube..."
+                withSonarQubeEnv('SonarQube_Local') {  // nom du serveur SonarQube défini dans Jenkins
+                    withCredentials([string(credentialsId: 'sonar', variable: 'mon-token-sonar')]) {
+                        sh """
+                            sonar-scanner \
+                              -Dsonar.projectKey=sonarqube \
+                              -Dsonar.projectName='sonarqube' \
+                              -Dsonar.projectVersion=1.0 \
+                              -Dsonar.sources=. \
+                              -Dsonar.exclusions=*/node_modules/,/build/,/dist/,/.test.js,*/.spec.js \
+                              -Dsonar.host.url=${SONAR_HOST_URL} \
+                              -Dsonar.token=${mon-token-sonar}
+                        """
+                    }
+                }
+            }
+        } // 👈👉 Accolade fermante manquante ajoutée ici !
  
         stage('Build Backend Image') {
             steps {
