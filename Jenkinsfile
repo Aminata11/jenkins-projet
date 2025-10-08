@@ -38,13 +38,18 @@ pipeline {
     }
 }
 
-    stage('SonarQube Analysis') {
+stage('SonarQube Analysis') {
     steps {
         withSonarQubeEnv('sonar-server') {
-            sh '/opt/sonar-scanner/bin/sonar-scanner -X'
+            sh '''
+                echo "📦 Lancement de l'analyse SonarQube..."
+                cd $WORKSPACE
+                /opt/sonar-scanner/bin/sonar-scanner -X
+            '''
         }
     }
 }
+
 
 
 
