@@ -1,8 +1,6 @@
 pipeline {
     agent any
-     tools {
-        sonarQubeScanner 'SonarScanner'
-    }
+    
 
     environment {
         DOCKER_HUB_REPO = 'aminata286'
