@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    
+     tools {
+        sonarQubeScanner 'SonarScanner'
+    }
 
     environment {
         DOCKER_HUB_REPO = 'aminata286'
@@ -46,7 +48,7 @@ stage('SonarQube Analysis') {
 
 stage('Quality Gate') {
     steps {
-        timeout(time: 10, unit: 'MINUTES') {
+        timeout(time: 5, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: true
         }
     }
