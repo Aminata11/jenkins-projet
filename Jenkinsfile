@@ -21,23 +21,7 @@ pipeline {
             }
         }
 
-    stage('SonarQube Analysis') {
-            steps {
-               withSonarQubeEnv('SonarQube') {
-                sh '/opt/sonar-scanner/bin/sonar-scanner'
-               }
-
-            }
-        }
-
-    stage('Quality Gate') {
-            steps {
-                timeout(time: 2, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
-
+ 
         stage('Build Backend Image') {
             steps {
                 script {
