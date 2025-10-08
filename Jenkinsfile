@@ -46,11 +46,11 @@ stage('SonarQube Analysis') {
 stage('Quality Gate') {
     steps {
         timeout(time: 10, unit: 'MINUTES') {
-    waitForQualityGate abortPipeline: true
-}
-
+            waitForQualityGate abortPipeline: true
+        }
     }
 }
+
 
 
         stage('Build Backend Image') {
