@@ -2,11 +2,6 @@
 FROM node:20-alpine as build
 WORKDIR /app
 COPY package*.json ./
-ENV npm_config_network_retry 5
-ENV npm_config_fetch_retries 5
-ENV npm_config_fetch_retry_maxtimeout 60000
-ENV npm_config_strict_ssl false
-RUN npm config delete proxy && npm config delete https-proxy && npm config set registry https://registry.npmjs.org/ && npm install --no-audit --legacy-peer-deps
 RUN npm install
 COPY . .
 ARG VITE_API_URL
