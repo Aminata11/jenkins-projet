@@ -5,7 +5,7 @@ pipeline {
     environment {
         DOCKER_HUB_REPO = 'aminata286'
         SONAR_TOKEN = credentials('mon-token-sonar')
-        SONAR_HOST_URL  = 'http://host.docker.internal:9000'   // SonarQube local
+        SONAR_HOST_URL  = 'http://localhost:9000'   // SonarQube local
     }
 
     stages {
@@ -31,11 +31,19 @@ pipeline {
             /opt/sonar-scanner/bin/sonar-scanner \
             -Dsonar.projectKey=sonarqube \
             -Dsonar.sources=. \
-            -Dsonar.host.url=http://host.docker.internal:9000 \
+            -Dsonar.host.url=http://localhost:9000 \
             -Dsonar.login=$SONAR_TOKEN
         '''
     }
 }
+        stage('Quality Gate') {
+            steps {
+                echo "🛡️ Vérification du Quality Gate..."
+                timeout(time: 2, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
 
             }
         } // 👈👉 Accolade fermante manquante ajoutée ici !
