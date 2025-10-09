@@ -21,8 +21,9 @@ pipeline {
                 )
             }
         }
+        
 
-          stage('SonarQube Analysis') {
+         stage('SonarQube Analysis') {
             steps {
                 echo "🔍 Analyse du code avec SonarQube..."
                 withSonarQubeEnv('SonarQube_Local') {
@@ -36,8 +37,9 @@ pipeline {
         '''
     }
 }
+
             }
-              }
+        } // 👈👉 Accolade fermante manquante ajoutée ici !
                 
         stage('Quality Gate') {
             steps {
