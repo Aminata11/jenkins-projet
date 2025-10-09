@@ -41,19 +41,14 @@ pipeline {
             }
         } // 👈👉 Accolade fermante manquante ajoutée ici !
                 
-        stage('Quality Gate') {
-            steps {
-                echo "🛡️ Vérification du Quality Gate..."
-                timeout(time: 2, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }
+       stage('Quality Gate') {
+    steps {
+        echo "🛡️ Vérification du Quality Gate..."
+        timeout(time: 2, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
         }
-
-            }
-        } // 👈👉 Accolade fermante manquante ajoutée ici !
-
- 
+    }
+}
         stage('Build Backend Image') {
             steps {
                 script {
