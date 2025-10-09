@@ -36,6 +36,8 @@ pipeline {
         '''
     }
 }
+            }
+                
         stage('Quality Gate') {
             steps {
                 echo "🛡️ Vérification du Quality Gate..."
