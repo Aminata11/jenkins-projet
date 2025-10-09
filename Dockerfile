@@ -2,6 +2,7 @@
 FROM node:20-alpine as build
 WORKDIR /app
 COPY package*.json ./
+RUN npm config delete proxy && npm config delete https-proxy && npm config set registry https://registry.npmjs.org/
 RUN npm install
 COPY . .
 ARG VITE_API_URL
